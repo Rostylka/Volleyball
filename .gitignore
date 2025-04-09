@@ -12,6 +12,7 @@ buildNumber.properties
 mvnw.cmd
 mvnw
 HELP.md
+.gitattributes
 # https://github.com/takari/maven-wrapper#usage-without-binary-jar
 .mvn/wrapper/maven-wrapper.jar
 .mvn/wrapper/maven-wrapper.properties
