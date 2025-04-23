@@ -1,0 +1,35 @@
+databaseChangeLog:
+  - changeSet:
+      id: 3
+      author: Rostylka
+      changes:
+        - insert:
+            tableName: teams
+            columns:
+              - column:
+                  name: team_name
+                  value: "Barkom Kazhany Lviv"
+              - column:
+                  name: coach
+                  value: "Yuri Melnychuk"
+              - column:
+                  name: city
+                  value: "Lviv"
+              - column:
+                  name: logo
+                  value: "barkom_kazhany_logo.png"
+        - insert:
+            tableName: teams
+            columns:
+              - column:
+                  name: team_name
+                  value: "Resovia"
+              - column:
+                  name: coach
+                  value: "Giovanni Guidetti"
+              - column:
+                  name: city
+                  value: "Rzeszów"
+              - column:
+                  name: logo
+                  value: "resovia_logo.png"
