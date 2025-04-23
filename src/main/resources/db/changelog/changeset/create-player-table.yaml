@@ -40,8 +40,6 @@ databaseChangeLog:
               - column:
                   name: team_id
                   type: BIGINT
-                  constraints:
-                    nullable: false
         - addForeignKeyConstraint:
             baseTableName: players
             baseColumnNames: team_id
