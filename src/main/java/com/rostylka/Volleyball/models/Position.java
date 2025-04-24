@@ -1,5 +1,8 @@
 package com.rostylka.Volleyball.models;
 
+import lombok.Getter;
+
+@Getter
 public enum Position {
     SETTER("Setter"),
     OUTSIDE_HITTER("Outside Hitter"),
@@ -7,6 +10,10 @@ public enum Position {
     MIDDLE_BLOCKER("Middle Blocker"),
     LIBERO("Libero");
 
-    Position(String position) {
+    private final String name;
+
+    Position(String name) {
+        this.name = name;
     }
+
 }

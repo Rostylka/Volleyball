@@ -1,5 +1,6 @@
 package com.rostylka.Volleyball.models;
 
+import com.rostylka.Volleyball.utils.PositionConverter;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -24,6 +25,7 @@ public class Player {
     @Column(name = "last_name")
     private String lastName;
     @Column(name = "position")
+    @Convert(converter = PositionConverter.class)
     private Position position;
     @Column(name = "age")
     private int age;
