@@ -8,5 +8,5 @@ import org.mapstruct.Mapper;
 public interface PlayerMapper {
 
     Player toPlayer(PlayerDto playerDto);
-    PlayerDto playerDto(Player player);
+    PlayerDto toPlayerDto(Player player);
 }

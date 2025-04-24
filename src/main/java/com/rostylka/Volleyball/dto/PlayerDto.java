@@ -12,7 +12,6 @@ import java.util.Objects;
 @AllArgsConstructor
 @Getter
 @Setter
-
 public class PlayerDto {
 
     private Long id;
@@ -22,19 +21,19 @@ public class PlayerDto {
     private int age;
     private int height;
     private int weight;
-    private TeamDto team;
+    private Long teamId;
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         PlayerDto playerDto = (PlayerDto) o;
-        return age == playerDto.age && height == playerDto.height && weight == playerDto.weight && Objects.equals(firstName, playerDto.firstName) && Objects.equals(lastName, playerDto.lastName) && position == playerDto.position && Objects.equals(team, playerDto.team);
+        return age == playerDto.age && height == playerDto.height && weight == playerDto.weight && Objects.equals(firstName, playerDto.firstName) && Objects.equals(lastName, playerDto.lastName) && position == playerDto.position && Objects.equals(teamId, playerDto.teamId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(firstName, lastName, position, age, height, weight, team);
+        return Objects.hash(firstName, lastName, position, age, height, weight, teamId);
     }
 
     @Override
@@ -47,7 +46,7 @@ public class PlayerDto {
                 ", age=" + age +
                 ", height=" + height +
                 ", weight=" + weight +
-                ", team=" + team +
+                ", teamId=" + teamId +
                 '}';
     }
 }
