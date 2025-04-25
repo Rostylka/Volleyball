@@ -2,13 +2,10 @@ package com.rostylka.Volleyball.services.implementations;
 
 import com.rostylka.Volleyball.dto.teamDto.TeamCreateDto;
 import com.rostylka.Volleyball.dto.teamDto.TeamDto;
-import com.rostylka.Volleyball.mappers.PlayerMapper;
 import com.rostylka.Volleyball.mappers.TeamMapper;
-import com.rostylka.Volleyball.models.Team;
 import com.rostylka.Volleyball.repositories.TeamRepository;
 import com.rostylka.Volleyball.services.TeamService;
 import lombok.AllArgsConstructor;
-import org.springframework.boot.autoconfigure.http.client.HttpClientAutoConfiguration;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;

@@ -3,7 +3,6 @@ package com.rostylka.Volleyball.services.implementations;
 import com.rostylka.Volleyball.dto.playerDto.PlayerCreateDto;
 import com.rostylka.Volleyball.dto.playerDto.PlayerDto;
 import com.rostylka.Volleyball.mappers.PlayerMapper;
-import com.rostylka.Volleyball.models.Player;
 import com.rostylka.Volleyball.repositories.PlayerRepository;
 import com.rostylka.Volleyball.services.PlayerService;
 import lombok.AllArgsConstructor;
@@ -39,7 +38,9 @@ public class PlayerServiceImpl implements PlayerService {
 
     @Override
     public PlayerDto updatePlayer(PlayerDto playerDto) {
-        return playerMapper.toPlayerDto(playerRepository.save(playerMapper.toPlayer(playerDto)));
+        if (playerRepository.existsById(playerDto.getId())) {
+            return playerMapper.toPlayerDto(playerRepository.save(playerMapper.toPlayer(playerDto)));
+        } else throw new ResponseStatusException(HttpStatusCode.valueOf(404), "Player Not Found");
     }
 
     @Override
