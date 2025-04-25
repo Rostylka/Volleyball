@@ -28,7 +28,7 @@ public class TeamController {
 
     @PostMapping("/create")
     public ResponseEntity<TeamDto> createTeam(@RequestBody TeamCreateDto teamCreateDto) {
-        return ResponseEntity.ok().body(teamService.createTeam(teamCreateDto));
+        return ResponseEntity.ok().body(teamService.createTeam(teamCreateDto)); //todo change ok
     }
 
     @PutMapping("/update")

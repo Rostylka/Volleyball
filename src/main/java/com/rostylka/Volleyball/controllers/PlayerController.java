@@ -33,7 +33,7 @@ public class PlayerController {
 
     @PostMapping("/create")
     public ResponseEntity<PlayerDto> createPlayer(@RequestBody PlayerCreateDto playerCreateDto) {
-        return ResponseEntity.ok().body(playerService.createPlayer(playerCreateDto));
+        return ResponseEntity.ok().body(playerService.createPlayer(playerCreateDto)); //todo change ok
     }
 
     @DeleteMapping("/delete/{id}")
