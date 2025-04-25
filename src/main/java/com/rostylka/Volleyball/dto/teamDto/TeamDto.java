@@ -1,5 +1,6 @@
-package com.rostylka.Volleyball.dto;
+package com.rostylka.Volleyball.dto.teamDto;
 
+import com.rostylka.Volleyball.dto.playerDto.PlayerDto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

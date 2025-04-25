@@ -1,12 +1,15 @@
 package com.rostylka.Volleyball.services.implementations;
 
-import com.rostylka.Volleyball.dto.PlayerDto;
+import com.rostylka.Volleyball.dto.playerDto.PlayerCreateDto;
+import com.rostylka.Volleyball.dto.playerDto.PlayerDto;
 import com.rostylka.Volleyball.mappers.PlayerMapper;
 import com.rostylka.Volleyball.models.Player;
 import com.rostylka.Volleyball.repositories.PlayerRepository;
 import com.rostylka.Volleyball.services.PlayerService;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -18,8 +21,8 @@ public class PlayerServiceImpl implements PlayerService {
     private final PlayerMapper playerMapper;
 
     @Override
-    public PlayerDto createPlayer(PlayerDto playerDto) {
-        return playerMapper.toPlayerDto(playerRepository.save(playerMapper.toPlayer(playerDto)));
+    public PlayerDto createPlayer(PlayerCreateDto playerCreateDto) {
+        return playerMapper.toPlayerDto(playerRepository.save(playerMapper.toPlayer(playerCreateDto)));
 
     }
 
@@ -30,20 +33,13 @@ public class PlayerServiceImpl implements PlayerService {
 
     @Override
     public PlayerDto findPlayerById(Long id) {
-        return playerMapper.toPlayerDto(playerRepository.getReferenceById(id));
+        return playerMapper.toPlayerDto(playerRepository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatusCode.valueOf(404), "Player Not Found")));
     }
 
     @Override
     public PlayerDto updatePlayer(PlayerDto playerDto) {
-        Player updatedPlayer = playerRepository.getReferenceById(playerDto.getId());
-        updatedPlayer.setFirstName(playerDto.getFirstName());
-        updatedPlayer.setLastName(playerDto.getLastName());
-        updatedPlayer.setPosition(playerDto.getPosition());
-        updatedPlayer.setAge(playerDto.getAge());
-        updatedPlayer.setHeight(playerDto.getHeight());
-        updatedPlayer.setWeight(playerDto.getWeight());
-        updatedPlayer.setTeamId(playerDto.getTeamId());
-        return playerMapper.toPlayerDto(playerRepository.save(updatedPlayer));
+        return playerMapper.toPlayerDto(playerRepository.save(playerMapper.toPlayer(playerDto)));
     }
 
     @Override

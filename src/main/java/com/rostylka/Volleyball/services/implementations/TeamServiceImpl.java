@@ -1,13 +1,17 @@
 package com.rostylka.Volleyball.services.implementations;
 
-import com.rostylka.Volleyball.dto.TeamDto;
+import com.rostylka.Volleyball.dto.teamDto.TeamCreateDto;
+import com.rostylka.Volleyball.dto.teamDto.TeamDto;
 import com.rostylka.Volleyball.mappers.PlayerMapper;
 import com.rostylka.Volleyball.mappers.TeamMapper;
 import com.rostylka.Volleyball.models.Team;
 import com.rostylka.Volleyball.repositories.TeamRepository;
 import com.rostylka.Volleyball.services.TeamService;
 import lombok.AllArgsConstructor;
+import org.springframework.boot.autoconfigure.http.client.HttpClientAutoConfiguration;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -16,11 +20,10 @@ import java.util.List;
 public class TeamServiceImpl implements TeamService {
     private final TeamMapper teamMapper;
     private final TeamRepository teamRepository;
-    private final PlayerMapper playerMapper;
 
     @Override
-    public TeamDto createTeam(TeamDto teamDto) {
-        return teamMapper.toTeamDto(teamRepository.save(teamMapper.toTeam(teamDto)));
+    public TeamDto createTeam(TeamCreateDto teamCreateDto) {
+        return teamMapper.toTeamDto(teamRepository.save(teamMapper.toTeam(teamCreateDto)));
 
     }
 
@@ -31,18 +34,13 @@ public class TeamServiceImpl implements TeamService {
 
     @Override
     public TeamDto findTeamById(Long id) {
-        return teamMapper.toTeamDto(teamRepository.getReferenceById(id));
+        return teamMapper.toTeamDto(teamRepository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatusCode.valueOf(404), "Team Not Found")));
     }
 
     @Override
     public TeamDto updateTeam(TeamDto teamDto) {
-        Team updatedTeam = teamRepository.getReferenceById(teamDto.getId());
-        updatedTeam.setName(teamDto.getName());
-        updatedTeam.setCoach(teamDto.getCoach());
-        updatedTeam.setCity(teamDto.getCity());
-        updatedTeam.setLogo(teamDto.getLogo());
-        updatedTeam.setPlayers(teamDto.getPlayers().stream().map(playerMapper::toPlayer).toList());
-        return teamMapper.toTeamDto(teamRepository.save(updatedTeam));
+        return teamMapper.toTeamDto(teamRepository.save(teamMapper.toTeam(teamDto)));
     }
 
     @Override

@@ -1,4 +1,4 @@
-package com.rostylka.Volleyball.dto;
+package com.rostylka.Volleyball.dto.playerDto;
 
 import com.rostylka.Volleyball.models.Position;
 import lombok.AllArgsConstructor;
