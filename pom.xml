@@ -12,7 +12,7 @@
 	<artifactId>Volleyball</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>Volleyball</name>
-	<description>Demo project for Spring Boot</description>
+	<description>My First Java REST Api</description>
 	<url/>
 	<licenses>
 		<license/>
