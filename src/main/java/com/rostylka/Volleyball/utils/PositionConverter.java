@@ -16,8 +16,8 @@ public class PositionConverter implements AttributeConverter<Position, String> {
         if (dbData == null) {
             return null;
         }
-        for (Position position: Position.values()) {
-            if(position.getName().equals(dbData)) {
+        for (Position position : Position.values()) {
+            if (position.getName().equals(dbData)) {
                 return position;
             }
         }
