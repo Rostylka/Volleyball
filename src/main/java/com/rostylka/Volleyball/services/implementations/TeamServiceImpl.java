@@ -37,7 +37,9 @@ public class TeamServiceImpl implements TeamService {
 
     @Override
     public TeamDto updateTeam(TeamDto teamDto) {
-        return teamMapper.toTeamDto(teamRepository.save(teamMapper.toTeam(teamDto)));
+        if (teamRepository.existsById(teamDto.getId())) {
+            return teamMapper.toTeamDto(teamRepository.save(teamMapper.toTeam(teamDto)));
+        } else throw new ResponseStatusException(HttpStatusCode.valueOf(404), "Team Not Found");
     }
 
     @Override
