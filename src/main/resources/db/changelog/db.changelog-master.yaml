@@ -1,9 +1,9 @@
 databaseChangeLog:
   - include:
-      file: db/changelog/changeset/create-team-table.yaml
+      file: db/changelog/changeset/create-team-table.sql
   - include:
-      file: db/changelog/changeset/create-player-table.yaml
+      file: db/changelog/changeset/create-player-table.sql
   - include:
-      file: db/changelog/changeset/insert-teams.yaml
+      file: db/changelog/changeset/insert-teams.sql
   - include:
-      file: db/changelog/changeset/insert-players.yaml
+      file: db/changelog/changeset/insert-players.sql

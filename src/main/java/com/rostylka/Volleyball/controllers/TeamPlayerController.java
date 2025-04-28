@@ -1,6 +1,6 @@
 package com.rostylka.Volleyball.controllers;
 
-import com.rostylka.Volleyball.dto.playerDto.PlayerDto;
+import com.rostylka.Volleyball.dto.PlayerDto;
 import com.rostylka.Volleyball.services.TeamPlayerService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @AllArgsConstructor
 @RestController
-@RequestMapping("api/team_players")
+@RequestMapping("api/v1/team_players")
 public class TeamPlayerController {
     private final TeamPlayerService teamPlayerService;
 

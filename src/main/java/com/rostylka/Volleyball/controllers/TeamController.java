@@ -1,7 +1,6 @@
 package com.rostylka.Volleyball.controllers;
 
-import com.rostylka.Volleyball.dto.teamDto.TeamCreateDto;
-import com.rostylka.Volleyball.dto.teamDto.TeamDto;
+import com.rostylka.Volleyball.dto.TeamDto;
 import com.rostylka.Volleyball.services.TeamService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -11,7 +10,7 @@ import java.util.List;
 
 @AllArgsConstructor
 @RestController
-@RequestMapping("api/teams")
+@RequestMapping("api/v1/teams")
 public class TeamController {
 
     private final TeamService teamService;
@@ -22,22 +21,22 @@ public class TeamController {
     }
 
     @GetMapping("/{id}")
-    public TeamDto getTeamById(@PathVariable("id") Long id) {
+    public TeamDto getTeamById(@PathVariable Long id) {
         return teamService.findTeamById(id);
     }
 
-    @PostMapping("/create")
-    public ResponseEntity<TeamDto> createTeam(@RequestBody TeamCreateDto teamCreateDto) {
-        return ResponseEntity.ok().body(teamService.createTeam(teamCreateDto)); //todo change ok
+    @PostMapping
+    public ResponseEntity<TeamDto> createTeam(@RequestBody TeamDto teamDto) {
+        return ResponseEntity.ok().body(teamService.createTeam(teamDto)); //todo change ok
     }
 
-    @PutMapping("/update")
-    public ResponseEntity<TeamDto> updateTeam(@RequestBody TeamDto teamDto) {
-        return ResponseEntity.ok().body(teamService.updateTeam(teamDto));
+    @PutMapping("/{id}")
+    public ResponseEntity<TeamDto> updateTeam(@PathVariable Long id, @RequestBody TeamDto teamDto) {
+        return ResponseEntity.ok().body(teamService.updateTeam(id, teamDto));
     }
 
-    @DeleteMapping("/delete/{id}")
-    public void deleteTeam(@PathVariable("id") Long id) {
+    @DeleteMapping("/{id}")
+    public void deleteTeam(@PathVariable Long id) {
         teamService.deleteTeam(id);
     }
 

@@ -7,7 +7,7 @@ import lombok.Getter;
 public enum Position {
     SETTER("Setter"),
     OUTSIDE_HITTER("Outside Hitter"),
-    OPPOSITE_HITTER("Opposite"),
+    OPPOSITE("Opposite"),
     MIDDLE_BLOCKER("Middle Blocker"),
     LIBERO("Libero");
 

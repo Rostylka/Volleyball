@@ -1,7 +1,6 @@
 package com.rostylka.Volleyball.services.implementations;
 
-import com.rostylka.Volleyball.dto.teamDto.TeamCreateDto;
-import com.rostylka.Volleyball.dto.teamDto.TeamDto;
+import com.rostylka.Volleyball.dto.TeamDto;
 import com.rostylka.Volleyball.mappers.TeamMapper;
 import com.rostylka.Volleyball.repositories.TeamRepository;
 import com.rostylka.Volleyball.services.TeamService;
@@ -19,8 +18,8 @@ public class TeamServiceImpl implements TeamService {
     private final TeamRepository teamRepository;
 
     @Override
-    public TeamDto createTeam(TeamCreateDto teamCreateDto) {
-        return teamMapper.toTeamDto(teamRepository.save(teamMapper.toTeam(teamCreateDto)));
+    public TeamDto createTeam(TeamDto teamDto) {
+        return teamMapper.toTeamDto(teamRepository.save(teamMapper.toTeam(teamDto)));
 
     }
 
@@ -36,8 +35,8 @@ public class TeamServiceImpl implements TeamService {
     }
 
     @Override
-    public TeamDto updateTeam(TeamDto teamDto) {
-        if (teamRepository.existsById(teamDto.getId())) {
+    public TeamDto updateTeam(Long id, TeamDto teamDto) {
+        if (teamRepository.existsById(id)) {
             return teamMapper.toTeamDto(teamRepository.save(teamMapper.toTeam(teamDto)));
         } else throw new ResponseStatusException(HttpStatusCode.valueOf(404), "Team Not Found");
     }
