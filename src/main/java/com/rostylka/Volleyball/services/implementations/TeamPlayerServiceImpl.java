@@ -1,6 +1,5 @@
 package com.rostylka.Volleyball.services.implementations;
 
-import com.rostylka.Volleyball.dto.player.PlayerRequestDto;
 import com.rostylka.Volleyball.dto.player.PlayerResponseDto;
 import com.rostylka.Volleyball.mappers.PlayerMapper;
 import com.rostylka.Volleyball.services.PlayerService;
@@ -31,9 +30,14 @@ public class TeamPlayerServiceImpl implements TeamPlayerService {
     }
 
     @Override
-    public PlayerResponseDto removePlayerFromTeam(Long playerId) {
-        PlayerResponseDto playerResponseDto = playerService.findPlayerById(playerId);
-        playerResponseDto.setTeamId(null);
-        return playerService.updatePlayer(playerId, playerMapper.toPlayerRequestDto(playerResponseDto));
+    public PlayerResponseDto removePlayerFromTeam(Long teamId, Long playerId) {
+        try {
+            teamService.findTeamById(teamId);
+            PlayerResponseDto playerResponseDto = playerService.findPlayerById(playerId);
+            playerResponseDto.setTeamId(null);
+            return playerService.updatePlayer(playerId, playerMapper.toPlayerRequestDto(playerResponseDto));
+        } catch (ResponseStatusException e) {
+            throw new ResponseStatusException(HttpStatusCode.valueOf(400), "Bed Request");
+        }
     }
 }

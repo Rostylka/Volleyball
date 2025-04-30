@@ -10,6 +10,7 @@ import org.mapstruct.Mapping;
 public interface TeamMapper {
 
     @Mapping(target = "id", ignore = true)
+    @Mapping(target = "players", ignore = true)
     Team toTeam(TeamRequestDto teamRequestDto);
 
     TeamResponseDto toTeamResponseDto(Team team);

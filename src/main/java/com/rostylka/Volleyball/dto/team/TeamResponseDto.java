@@ -1,6 +1,6 @@
 package com.rostylka.Volleyball.dto.team;
 
-import com.rostylka.Volleyball.dto.player.PlayerRequestDto;
+import com.rostylka.Volleyball.dto.player.PlayerResponseDto;
 import lombok.Data;
 
 import java.util.List;
@@ -13,5 +13,5 @@ public class TeamResponseDto {
     private String coach;
     private String city;
     private String logo;
-    private List<PlayerRequestDto> players;
+    private List<PlayerResponseDto> players;
 }

@@ -1,10 +1,12 @@
 package com.rostylka.Volleyball.controllers;
 
+import com.rostylka.Volleyball.dto.player.PlayerResponseDto;
 import com.rostylka.Volleyball.dto.team.TeamRequestDto;
 import com.rostylka.Volleyball.dto.team.TeamResponseDto;
+import com.rostylka.Volleyball.services.TeamPlayerService;
 import com.rostylka.Volleyball.services.TeamService;
 import lombok.AllArgsConstructor;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,10 +17,11 @@ import java.util.List;
 public class TeamController {
 
     private final TeamService teamService;
+    private final TeamPlayerService teamPlayerService;
 
     @GetMapping
-    public ResponseEntity<List<TeamResponseDto>> getAllTeams() {
-        return ResponseEntity.ok().body(teamService.readAllTeams());
+    public List<TeamResponseDto> getAllTeams() {
+        return teamService.readAllTeams();
     }
 
     @GetMapping("/{id}")
@@ -27,13 +30,26 @@ public class TeamController {
     }
 
     @PostMapping
-    public ResponseEntity<TeamResponseDto> createTeam(@RequestBody TeamRequestDto teamRequestDto) {
-        return ResponseEntity.ok().body(teamService.createTeam(teamRequestDto)); //todo change ok
+    @ResponseStatus(HttpStatus.CREATED)
+    public TeamResponseDto createTeam(@RequestBody TeamRequestDto teamRequestDto) {
+        return teamService.createTeam(teamRequestDto);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<TeamResponseDto> updateTeam(@PathVariable Long id, @RequestBody TeamRequestDto teamRequestDto) {
-        return ResponseEntity.ok().body(teamService.updateTeam(id, teamRequestDto));
+    public TeamResponseDto updateTeam(@PathVariable Long id, @RequestBody TeamRequestDto teamRequestDto) {
+        return teamService.updateTeam(id, teamRequestDto);
+    }
+
+    @PatchMapping("/{id}/add-player/{playerId}")
+    public PlayerResponseDto addPlayerToTeam(@PathVariable Long id,
+                                             @PathVariable Long playerId) {
+        return teamPlayerService.addPlayerToTeam(id, playerId);
+    }
+
+    @PatchMapping("/{id}/remove-player/{playerId}")
+    public PlayerResponseDto removePlayerFromTeam(@PathVariable Long id,
+                                                  @PathVariable Long playerId) {
+        return teamPlayerService.removePlayerFromTeam(id, playerId);
     }
 
     @DeleteMapping("/{id}")

@@ -4,7 +4,7 @@ import com.rostylka.Volleyball.dto.player.PlayerRequestDto;
 import com.rostylka.Volleyball.dto.player.PlayerResponseDto;
 import com.rostylka.Volleyball.services.PlayerService;
 import lombok.AllArgsConstructor;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,23 +17,24 @@ public class PlayerController {
     private final PlayerService playerService;
 
     @GetMapping
-    public ResponseEntity<List<PlayerResponseDto>> getAllPlayer() {
-        return ResponseEntity.ok().body(playerService.readAllPlayers());
+    public List<PlayerResponseDto> getAllPlayer() {
+        return playerService.readAllPlayers();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<PlayerResponseDto> getPlayerById(@PathVariable Long id) {
-        return ResponseEntity.ok().body(playerService.findPlayerById(id));
-    }
-
-    @PutMapping("/{id}")
-    public ResponseEntity<PlayerResponseDto> updatePlayer(@PathVariable Long id, @RequestBody PlayerRequestDto playerRequestDto) {
-        return ResponseEntity.ok().body(playerService.updatePlayer(id, playerRequestDto));
+    public PlayerResponseDto getPlayerById(@PathVariable Long id) {
+        return playerService.findPlayerById(id);
     }
 
     @PostMapping
-    public ResponseEntity<PlayerResponseDto> createPlayer(@RequestBody PlayerRequestDto playerRequestDto) {
-        return ResponseEntity.ok().body(playerService.createPlayer(playerRequestDto)); //todo change ok
+    @ResponseStatus(HttpStatus.CREATED)
+    public PlayerResponseDto createPlayer(@RequestBody PlayerRequestDto playerRequestDto) {
+        return playerService.createPlayer(playerRequestDto);
+    }
+
+    @PutMapping("/{id}")
+    public PlayerResponseDto updatePlayer(@PathVariable Long id, @RequestBody PlayerRequestDto playerRequestDto) {
+        return playerService.updatePlayer(id, playerRequestDto);
     }
 
     @DeleteMapping("/{id}")
