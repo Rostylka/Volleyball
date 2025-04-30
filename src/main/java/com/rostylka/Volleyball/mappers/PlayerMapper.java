@@ -1,6 +1,7 @@
 package com.rostylka.Volleyball.mappers;
 
-import com.rostylka.Volleyball.dto.PlayerDto;
+import com.rostylka.Volleyball.dto.player.PlayerRequestDto;
+import com.rostylka.Volleyball.dto.player.PlayerResponseDto;
 import com.rostylka.Volleyball.models.Player;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -9,9 +10,9 @@ import org.mapstruct.Mapping;
 public interface PlayerMapper {
 
     @Mapping(target = "id", ignore = true)
-    Player toPlayer(PlayerDto playerDto);
+    Player toPlayer(PlayerRequestDto playerRequestDto);
 
-    //@Mapping(target = "id", ignore = true)
-    PlayerDto toPlayerDto(Player player);
+    PlayerResponseDto toPlayerResponseDto(Player player);
 
+    PlayerRequestDto toPlayerRequestDto(PlayerResponseDto toPlayerResponseDto);
 }

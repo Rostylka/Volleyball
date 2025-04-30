@@ -1,6 +1,7 @@
 package com.rostylka.Volleyball.services.implementations;
 
-import com.rostylka.Volleyball.dto.TeamDto;
+import com.rostylka.Volleyball.dto.team.TeamRequestDto;
+import com.rostylka.Volleyball.dto.team.TeamResponseDto;
 import com.rostylka.Volleyball.mappers.TeamMapper;
 import com.rostylka.Volleyball.repositories.TeamRepository;
 import com.rostylka.Volleyball.services.TeamService;
@@ -18,26 +19,26 @@ public class TeamServiceImpl implements TeamService {
     private final TeamRepository teamRepository;
 
     @Override
-    public TeamDto createTeam(TeamDto teamDto) {
-        return teamMapper.toTeamDto(teamRepository.save(teamMapper.toTeam(teamDto)));
+    public TeamResponseDto createTeam(TeamRequestDto teamRequestDto) {
+        return teamMapper.toTeamResponseDto(teamRepository.save(teamMapper.toTeam(teamRequestDto)));
 
     }
 
     @Override
-    public List<TeamDto> readAllTeams() {
-        return teamRepository.findAll().stream().map(teamMapper::toTeamDto).toList();
+    public List<TeamResponseDto> readAllTeams() {
+        return teamRepository.findAll().stream().map(teamMapper::toTeamResponseDto).toList();
     }
 
     @Override
-    public TeamDto findTeamById(Long id) {
-        return teamMapper.toTeamDto(teamRepository.findById(id)
+    public TeamResponseDto findTeamById(Long id) {
+        return teamMapper.toTeamResponseDto(teamRepository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatusCode.valueOf(404), "Team Not Found")));
     }
 
     @Override
-    public TeamDto updateTeam(Long id, TeamDto teamDto) {
+    public TeamResponseDto updateTeam(Long id, TeamRequestDto teamRequestDto) {
         if (teamRepository.existsById(id)) {
-            return teamMapper.toTeamDto(teamRepository.save(teamMapper.toTeam(teamDto)));
+            return teamMapper.toTeamResponseDto(teamRepository.save(teamMapper.toTeam(teamRequestDto)));
         } else throw new ResponseStatusException(HttpStatusCode.valueOf(404), "Team Not Found");
     }
 

@@ -1,18 +1,19 @@
 package com.rostylka.Volleyball.services;
 
-import com.rostylka.Volleyball.dto.TeamDto;
+import com.rostylka.Volleyball.dto.team.TeamRequestDto;
+import com.rostylka.Volleyball.dto.team.TeamResponseDto;
 
 import java.util.List;
 
 public interface TeamService {
 
-    TeamDto createTeam(TeamDto teamDto);
+    TeamResponseDto createTeam(TeamRequestDto teamRequestDto);
 
-    List<TeamDto> readAllTeams();
+    List<TeamResponseDto> readAllTeams();
 
-    TeamDto findTeamById(Long id);
+    TeamResponseDto findTeamById(Long id);
 
-    TeamDto updateTeam(Long id, TeamDto teamDto);
+    TeamResponseDto updateTeam(Long id, TeamRequestDto teamRequestDto);
 
     void deleteTeam(Long id);
 }

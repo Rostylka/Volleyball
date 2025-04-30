@@ -1,7 +1,8 @@
 package com.rostylka.Volleyball.services.implementations;
 
 
-import com.rostylka.Volleyball.dto.PlayerDto;
+import com.rostylka.Volleyball.dto.player.PlayerRequestDto;
+import com.rostylka.Volleyball.dto.player.PlayerResponseDto;
 import com.rostylka.Volleyball.mappers.PlayerMapper;
 import com.rostylka.Volleyball.repositories.PlayerRepository;
 import com.rostylka.Volleyball.services.PlayerService;
@@ -20,26 +21,26 @@ public class PlayerServiceImpl implements PlayerService {
     private final PlayerMapper playerMapper;
 
     @Override
-    public PlayerDto createPlayer(PlayerDto playerDto) {
-        return playerMapper.toPlayerDto(playerRepository.save(playerMapper.toPlayer(playerDto)));
+    public PlayerResponseDto createPlayer(PlayerRequestDto playerRequestDto) {
+        return playerMapper.toPlayerResponseDto(playerRepository.save(playerMapper.toPlayer(playerRequestDto)));
 
     }
 
     @Override
-    public List<PlayerDto> readAllPlayers() {
-        return playerRepository.findAll().stream().map(playerMapper::toPlayerDto).toList();
+    public List<PlayerResponseDto> readAllPlayers() {
+        return playerRepository.findAll().stream().map(playerMapper::toPlayerResponseDto).toList();
     }
 
     @Override
-    public PlayerDto findPlayerById(Long id) {
-        return playerMapper.toPlayerDto(playerRepository.findById(id)
+    public PlayerResponseDto findPlayerById(Long id) {
+        return playerMapper.toPlayerResponseDto(playerRepository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatusCode.valueOf(404), "Player Not Found")));
     }
 
     @Override
-    public PlayerDto updatePlayer(Long id, PlayerDto playerDto) {
+    public PlayerResponseDto updatePlayer(Long id, PlayerRequestDto playerRequestDto) {
         if (playerRepository.existsById(id)) {
-            return playerMapper.toPlayerDto(playerRepository.save(playerMapper.toPlayer(playerDto)));
+            return playerMapper.toPlayerResponseDto(playerRepository.save(playerMapper.toPlayer(playerRequestDto)));
         } else throw new ResponseStatusException(HttpStatusCode.valueOf(404), "Player Not Found");
     }
 

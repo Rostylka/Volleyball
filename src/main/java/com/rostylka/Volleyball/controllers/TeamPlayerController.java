@@ -1,6 +1,7 @@
 package com.rostylka.Volleyball.controllers;
 
-import com.rostylka.Volleyball.dto.PlayerDto;
+import com.rostylka.Volleyball.dto.player.PlayerRequestDto;
+import com.rostylka.Volleyball.dto.player.PlayerResponseDto;
 import com.rostylka.Volleyball.services.TeamPlayerService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -16,13 +17,13 @@ public class TeamPlayerController {
     private final TeamPlayerService teamPlayerService;
 
     @PatchMapping("/add_team_player")
-    public ResponseEntity<PlayerDto> addPlayerToTeam(@RequestParam Long player,
-                                                   @RequestParam Long team){
+    public ResponseEntity<PlayerResponseDto> addPlayerToTeam(@RequestParam Long player,
+                                                            @RequestParam Long team){
         return ResponseEntity.ok().body(teamPlayerService.addPlayerToTeam(team, player));
     }
 
     @PatchMapping("/remove_from_team")
-    public ResponseEntity<PlayerDto> removePlayerFromTeam(@RequestParam Long player){
+    public ResponseEntity<PlayerResponseDto> removePlayerFromTeam(@RequestParam Long player){
         return ResponseEntity.ok().body(teamPlayerService.removePlayerFromTeam(player));
     }
 }

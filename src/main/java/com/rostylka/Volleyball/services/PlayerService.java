@@ -1,18 +1,19 @@
 package com.rostylka.Volleyball.services;
 
-import com.rostylka.Volleyball.dto.PlayerDto;
+import com.rostylka.Volleyball.dto.player.PlayerRequestDto;
+import com.rostylka.Volleyball.dto.player.PlayerResponseDto;
 
 import java.util.List;
 
 public interface PlayerService {
 
-    PlayerDto createPlayer(PlayerDto playerDto);
+    PlayerResponseDto createPlayer(PlayerRequestDto playerRequestDto);
 
-    List<PlayerDto> readAllPlayers();
+    List<PlayerResponseDto> readAllPlayers();
 
-    PlayerDto findPlayerById(Long id);
+    PlayerResponseDto findPlayerById(Long id);
 
-    PlayerDto updatePlayer(Long id, PlayerDto playerDto);
+    PlayerResponseDto updatePlayer(Long id, PlayerRequestDto playerRequestDto);
 
     void deletePlayer(Long id);
 }

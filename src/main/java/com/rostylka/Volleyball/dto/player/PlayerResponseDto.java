@@ -1,13 +1,12 @@
-package com.rostylka.Volleyball.dto;
+package com.rostylka.Volleyball.dto.player;
 
 import com.rostylka.Volleyball.models.Position;
-import lombok.*;
-
-import java.util.Objects;
+import lombok.Data;
 
 @Data
-public class PlayerDto {
+public class PlayerResponseDto {
 
+    private Long id;
     private String firstName;
     private String lastName;
     private Position position;

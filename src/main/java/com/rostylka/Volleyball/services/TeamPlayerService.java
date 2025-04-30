@@ -1,10 +1,11 @@
 package com.rostylka.Volleyball.services;
 
-import com.rostylka.Volleyball.dto.PlayerDto;
+import com.rostylka.Volleyball.dto.player.PlayerRequestDto;
+import com.rostylka.Volleyball.dto.player.PlayerResponseDto;
 
 public interface TeamPlayerService {
 
-    PlayerDto addPlayerToTeam(Long teamId, Long playerId);
+    PlayerResponseDto addPlayerToTeam(Long teamId, Long playerId);
 
-    PlayerDto removePlayerFromTeam(Long player);
+    PlayerResponseDto removePlayerFromTeam(Long player);
 }
