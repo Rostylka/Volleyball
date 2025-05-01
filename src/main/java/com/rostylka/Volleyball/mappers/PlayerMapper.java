@@ -14,5 +14,4 @@ public interface PlayerMapper {
 
     PlayerResponseDto toPlayerResponseDto(Player player);
 
-    PlayerRequestDto toPlayerRequestDto(PlayerResponseDto toPlayerResponseDto);
 }
