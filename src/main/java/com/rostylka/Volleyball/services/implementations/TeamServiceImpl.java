@@ -2,15 +2,14 @@ package com.rostylka.Volleyball.services.implementations;
 
 import com.rostylka.Volleyball.dto.team.TeamRequestDto;
 import com.rostylka.Volleyball.dto.team.TeamResponseDto;
+import com.rostylka.Volleyball.exceptions.team.TeamNotFoundException;
 import com.rostylka.Volleyball.mappers.TeamMapper;
 import com.rostylka.Volleyball.models.Player;
 import com.rostylka.Volleyball.models.Team;
 import com.rostylka.Volleyball.repositories.TeamRepository;
 import com.rostylka.Volleyball.services.TeamService;
 import lombok.AllArgsConstructor;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -36,14 +35,14 @@ public class TeamServiceImpl implements TeamService {
     @Override
     public TeamResponseDto findTeamById(Long id) {
         Team team = teamRepository.findById(id)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatusCode.valueOf(404), "Team Not Found"));
+                .orElseThrow(TeamNotFoundException::new);
         return teamMapper.toTeamResponseDto(team);
     }
 
     @Override
     public TeamResponseDto updateTeam(Long id, TeamRequestDto teamRequestDto) {
         Team oldteam = teamRepository.findById(id)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatusCode.valueOf(404), "Team Not Found"));
+                .orElseThrow(TeamNotFoundException::new);
         Team updatedTeam = teamMapper.toTeam(teamRequestDto);
         List<Player> players = oldteam.getPlayers();
         updatedTeam.setId(id);

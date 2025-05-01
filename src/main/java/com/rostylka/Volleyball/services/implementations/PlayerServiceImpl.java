@@ -3,14 +3,13 @@ package com.rostylka.Volleyball.services.implementations;
 
 import com.rostylka.Volleyball.dto.player.PlayerRequestDto;
 import com.rostylka.Volleyball.dto.player.PlayerResponseDto;
+import com.rostylka.Volleyball.exceptions.player.PlayerNotFoundException;
 import com.rostylka.Volleyball.mappers.PlayerMapper;
 import com.rostylka.Volleyball.models.Player;
 import com.rostylka.Volleyball.repositories.PlayerRepository;
 import com.rostylka.Volleyball.services.PlayerService;
 import lombok.AllArgsConstructor;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -37,14 +36,14 @@ public class PlayerServiceImpl implements PlayerService {
     @Override
     public PlayerResponseDto findPlayerById(Long id) {
         Player player = playerRepository.findById(id)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatusCode.valueOf(404), "Player Not Found"));
+                .orElseThrow(PlayerNotFoundException::new);
         return playerMapper.toPlayerResponseDto(player);
     }
 
     @Override
     public PlayerResponseDto updatePlayer(Long id, PlayerRequestDto playerRequestDto) {
         playerRepository.findById(id)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatusCode.valueOf(404), "Player Not Found"));
+                .orElseThrow(PlayerNotFoundException::new);
         Player updatedPlayer = playerMapper.toPlayer(playerRequestDto);
         updatedPlayer.setId(id);
         updatedPlayer = playerRepository.save(updatedPlayer);
